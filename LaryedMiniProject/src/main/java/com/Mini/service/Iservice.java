@@ -8,4 +8,6 @@ public interface Iservice {
 
 	
 	public List<Employee> fetchEmp(int d1,int d2,int d3)throws Exception;
+	
+	public String registerEmployee(Employee emp)throws Exception;
 }

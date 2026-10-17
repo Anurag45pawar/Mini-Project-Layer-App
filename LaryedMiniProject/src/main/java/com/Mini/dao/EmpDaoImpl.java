@@ -3,6 +3,7 @@ package com.Mini.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import com.Mini.model.*;
@@ -20,6 +21,9 @@ public class EmpDaoImpl implements Idao {
 	private DataSource ds;
 	
 	private static final String sql="select * from Emp where empid in(?,?,?) order by empsalary desc ";
+	//when use auto incremetn in primary key we use mention fields in that
+	
+	private static final String Insert="insert into emp(empname, empdept, empsalary) VALUES (?, ?, ?)";
 	
 	@Override
 	public List<Employee> getEmpDesg(int d1,int d2,int d3) throws Exception {
@@ -59,6 +63,31 @@ public class EmpDaoImpl implements Idao {
 		
 		
 		return list;
+	}
+
+	@Override
+	public int InsertEmp(Employee emp) throws Exception {
+		int result=0;
+		try(Connection con=ds.getConnection();
+			PreparedStatement ps=con.prepareStatement(Insert);)	
+		{
+			ps.setString(1,emp.getEmpname());
+			ps.setString(2,emp.getEmpdept());
+			ps.setDouble(3,emp.getEmpsalary());
+			
+			result=ps.executeUpdate();
+			
+			
+			
+		}catch(SQLException e) {
+			
+			e.printStackTrace();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 
 }

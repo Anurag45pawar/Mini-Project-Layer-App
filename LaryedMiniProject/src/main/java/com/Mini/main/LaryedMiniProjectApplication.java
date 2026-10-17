@@ -1,6 +1,7 @@
 package com.Mini.main;
 
 import java.util.List;
+import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -22,6 +23,30 @@ private Icontroller icon;
 		 ConfigurableApplicationContext ctx=SpringApplication.run(LaryedMiniProjectApplication.class, args);
 		 
 		 EmpController empx=ctx.getBean("Econ",EmpController.class);
+		 
+		 Scanner scan=new Scanner(System.in);
+		 Employee empp=new Employee();
+		 
+		 System.out.println("Enter emp name");
+		 
+		 empp.setEmpname(scan.nextLine());
+		 
+		 System.out.println("Enter empdept");
+		 
+		 empp.setEmpdept(scan.nextLine());
+		 
+		 System.out.println("Enter empSalary");
+		 
+		 empp.setEmpsalary(scan.nextDouble());
+		 
+		 try {
+			 String msg=empx.processValues(empp);
+			 
+			 System.out.println(msg);
+		 }catch(Exception e) {
+			 
+			 e.printStackTrace();
+		 }
 		 
 		try {
 			

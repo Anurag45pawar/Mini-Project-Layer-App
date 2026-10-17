@@ -27,5 +27,12 @@ public class EmpService implements Iservice{
 		
 		return list;
 	}
+	@Override
+	public String registerEmployee(Employee emp) throws Exception {
+		
+		int k=idao.InsertEmp(emp);
+		
+		return k!=0?"inserted values":"not inserted values";
+	}
 
 }

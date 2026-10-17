@@ -17,5 +17,11 @@ public class EmpController implements Icontroller{
 		return emps.fetchEmp( d1, d2, d3);
 		
 	}
+	@Override
+	public String processValues(Employee emp) throws Exception {
+		
+		String msg=emps.registerEmployee(emp);
+		return msg;
+	}
 
 }
